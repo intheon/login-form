@@ -17,7 +17,6 @@
 
 
 			<div id="form-wrapper">
-				<p>Are you?</p>
 
 				<input type="button" value="A New User?" onClick="showElement('newUser')" id="btnNew">
 				<input type="button" value="An Existing User?"  onClick="showElement('existUser')" id="btnExist">
@@ -27,6 +26,7 @@
 				<form name="existUser" id="existUser" style="display:none">
 					<input type="text" placeholder="Username" id="eUsername"><br />
 					<input type="text" placeholder="Password" id="ePassword"><br />
+					<input type="hidden" value="existing" id="existingUser">
 					<input type="button" value="Submit" onclick="getInput(eUsername.value,ePassword.value)">
 				</form>
 
@@ -36,7 +36,7 @@
 					<input type="text" placeholder="First Name"><br />
 					<input type="text" placeholder="Last Name"><br />
 					<input type="text" placeholder="Email Address"><br />
-					<input type="button" value="Submit" onclick="getInput(eUsername.value,ePassword)">
+					<input type="button" value="Submit" onclick="getInput(nUsername.value,nPassword.value)">
 				</form>
 
 			</div>
