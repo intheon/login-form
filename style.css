@@ -1,0 +1,62 @@
+body,html{
+	margin:0;
+	padding:0;
+	font-family: Consolas, monaco, monospace;
+}
+#wrap{
+	margin:0px;
+	padding:0px;
+}
+
+#head{
+	width:100%;
+	height:auto;
+	background:#BDCF8A;
+	padding-bottom:0.6%;
+	padding-top:1%;
+	font-family: Monaco, Consolas, "Lucida Console", monospace;
+	position:relative;
+	border-bottom: 6px solid;
+	border-color: #BECB95;
+}
+
+#meat{
+
+}
+#foot{
+	bottom:0;
+	position:fixed;
+}
+
+#head,#form-wrapper{
+	text-align: center
+}
+
+a{
+	color:black;
+}
+
+input{
+	padding:2%;
+	background:#A3AF6F;
+	border: 2px solid;
+	border-color:#999D84;
+	border-radius:4px;
+	font-family: Monaco, Consolas, "Lucida Console", monospace;
+	font-size:1.05em;
+	color:#F4F7DA;
+	margin:1%;
+}
+
+#form-wrapper{
+	width:80%;
+	margin-left:10%;
+	margin-right:10%;
+	margin-top:-2%;
+	background-color: #E0EBBC;
+	padding:3px;
+	padding-top:1%;
+	padding-bottom:2%;
+	border-radius:10px;
+
+}
