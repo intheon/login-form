@@ -7,28 +7,56 @@ $database = 'dataman';
 
 $connection = mysqli_connect($host, $username, $password, $database);
 
-// manipulate values in db
+// check which function to execute
 
-if (isset($_POST['reset'])){
+if ($_POST['type'] == "existing"){
+	existingUser();
+}
+if ($_POST['type'] == "new"){
+	newUser();
+}
 
-	$reset = $_POST['reset'];
+function existingUser(){
 
-	if ($reset){
-		
-		$resetSql = "UPDATE weeknumbers SET weeknumber = 0 WHERE id = 1";
-		mysqli_query($connection,$resetSql);
+	if (isset($_POST['username']) && isset($_POST['password'])){
+
+		$eUsername = $_POST['username'];
+		$ePassword = $_POST['password'];
 
 	}
 
+	
+		echo "success... username is ";
+		echo $eUsername;
+		echo "\n";
+		echo "success... password is ";
+		echo $ePassword;
+
+
 }
+
+
+// manipulate values in db
+
+//if (isset($_POST['reset'])){
+
+	//$reset = $_POST['reset'];
+
+	//if ($reset){
+		
+	//	$resetSql = "UPDATE weeknumbers SET weeknumber = 0 WHERE id = 1";
+	//	mysqli_query($connection,$resetSql);
+
+	//}
+//}
 
 // retreive from db
 
-$result = mysqli_query($connection,"SELECT * FROM weeknumbers");
+//$result = mysqli_query($connection,"SELECT * FROM weeknumbers");
 
-while($row = mysqli_fetch_array($result)) {
-  echo $row['weeknumber'];
-}
+//while($row = mysqli_fetch_array($result)) {
+//  echo $row['weeknumber'];
+//}
 
 mysqli_close($connection);
 

@@ -26,17 +26,16 @@
 				<form name="existUser" id="existUser" style="display:none">
 					<input type="text" placeholder="Username" id="eUsername"><br />
 					<input type="text" placeholder="Password" id="ePassword"><br />
-					<input type="hidden" value="existing" id="existingUser">
-					<input type="button" value="Submit" onclick="getInput(eUsername.value,ePassword.value)">
+					<input type="button" value="Submit" onclick="getInput('existing',eUsername.value,ePassword.value)">
 				</form>
 
 				<form name="newUser" id="newUser" style="display:none">
-					<input type="text" placeholder="Username"><br />
-					<input type="text" placeholder="Password"><br />
-					<input type="text" placeholder="First Name"><br />
-					<input type="text" placeholder="Last Name"><br />
-					<input type="text" placeholder="Email Address"><br />
-					<input type="button" value="Submit" onclick="getInput(nUsername.value,nPassword.value)">
+					<input type="text" placeholder="Username" id="nUsername" ><br />
+					<input type="text" placeholder="Password" id="nPassword" ><br />
+					<input type="text" placeholder="First Name" id="nFirstname" ><br />
+					<input type="text" placeholder="Last Name" id="nLastname" ><br />
+					<input type="text" placeholder="Email Address" id="nEmail" ><br />
+					<input type="button" value="Submit" onclick="getInput('new',nUsername.value,nPassword.value,nFirstname.value,nLastname.value,nEmail.value)">
 				</form>
 
 			</div>
@@ -45,10 +44,9 @@
 		</div>
 
 
-
-		<div id="foot"> 
+	<div id="foot"> 
 			<p>Created with love and dedication by ben</p>
-		</div>
+	</div>
 
 	</div>
 
