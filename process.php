@@ -20,18 +20,31 @@ function existingUser(){
 
 	if (isset($_POST['username']) && isset($_POST['password'])){
 
+		global $connection;
+
 		$eUsername = $_POST['username'];
 		$ePassword = $_POST['password'];
 
+		$result = mysqli_query($connection,"SELECT tbl_username,tbl_password FROM login");
+
+		while($row = mysqli_fetch_array($result)) {
+		$uid = $row['tbl_username'];
+		$pw = $row['tbl_password'];
+		}
+
+		if ($uid == $eUsername && $pw == $ePassword) {
+			echo "shit works yo";
+		}
+		else {
+			echo "incorrect credentials asshat";
+		}
 	}
 
-	
-		echo "success... username is ";
-		echo $eUsername;
-		echo "\n";
-		echo "success... password is ";
-		echo $ePassword;
+}
 
+function newUser(){
+
+		echo "wow";
 
 }
 
