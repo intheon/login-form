@@ -36,7 +36,7 @@ function existingUser(){
 			echo "shit works yo";
 		}
 		else {
-			echo "incorrect credentials asshat";
+			echo "incorrect=true";
 		}
 	}
 

@@ -48,6 +48,16 @@ input{
 	margin:1%;
 }
 
+#output{
+	border-radius: 11px;
+	background-color:white;
+	margin-left:20%;
+	margin-right:20%;
+	padding:0.5%;
+	color:#67C590;
+	opacity: 0.8;
+}
+
 #form-wrapper{
 	width:80%;
 	margin-left:10%;
@@ -60,3 +70,4 @@ input{
 	border-radius:10px;
 
 }
+

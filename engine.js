@@ -9,6 +9,7 @@ function showElement(v){
 }
 
 var fieldNames = ["username=","password=","firstname=","lastname=","email="];
+var result;
 
 function getInput(){
 	var arr = [];
@@ -46,17 +47,48 @@ function getInput(){
 	//console.log(postData);
 }
 
+var resp;
+
 function firePHP(postData){
 	var http = new XMLHttpRequest();
 		http.onreadystatechange=function(){
 		if (http.readyState == 4 && http.status == 200){
-				console.log(http.responseText);
+				resp = http.responseText
+				return resp;
 			}
 		}
 		http.open("POST", "process.php", true);
 		http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		http.send(postData);
 }
+
+
+if (resp === undefined){
+		console.log("nothing to return");
+	}
+	else{
+		var returnedKey = resp.substring(0,resp.indexOf("="));	
+		var returnedVal = resp.substring(resp.indexOf("=")+1,resp.length);
+
+		if (returnedKey == "incorrect" && returnedVal == "true"){
+			var h = document.getElementById("output");
+			h.appendChild(document.createTextNode("You've entered incorrect credentials there buddy"));
+			h.style.display = "block";
+		}
+
+}
+
+
+document.getElementById("debug").addEventListener("click", printDebug);
+
+function printDebug(){
+
+}
+
+
+
+
+
 
 
 
