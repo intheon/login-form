@@ -33,10 +33,10 @@ function existingUser(){
 		}
 
 		if ($uid == $eUsername && $pw == $ePassword) {
-			echo "shit works yo";
+			echo "correct=true";
 		}
 		else {
-			echo "incorrect=true";
+			echo "correct=false";
 		}
 	}
 

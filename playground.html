@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<input type="button" value="click me" id="fireEvent">
+
+<div id="status">
+
+Status: <span id="code"></span>
+</div>
+
+<script type="text/javascript">
+
+var o = {};
+
+Object.observe(o, function(changes) {
+  // This callback runs asynchronously and aggregates the changes that happened
+  // in the previous execution turn into `changes` param.
+  changes.forEach(function(change) {
+    console.log(change.type, change.name, change.oldValue);
+    checkLength();
+  });
+});
+
+
+document.getElementById("fireEvent").addEventListener("click", doSomething);
+
+function doSomething(){
+
+
+o.foo = 1
+o.bar = "baz";
+o.foo = 2;
+
+
+
+}
+
+document.getElementById("code").appendChild(document.createTextNode("offline"));
+
+function checkLength(){
+
+	if (Object.keys(o).length === 0){
+	console.log("this object doesnt have any properties");
+	}
+	else {
+	console.log("this object has " + Object.keys(o).length + " properties");
+	}
+
+}
+
+
+</script>
+</body>
+</html>
