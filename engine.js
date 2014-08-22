@@ -1,25 +1,23 @@
+var fieldNames = ["username=","password=","firstname=","lastname=","email="];
+var result;
+var o = {};
+
 function showElement(v){
 	var elToShow = document.getElementById(v);
 	elToShow.style.display = "block";
-
 	if (v == "newUser" || v == "existUser"){
 		document.getElementById("btnNew").style.display = "none";
 		document.getElementById("btnExist").style.display = "none";
 	}
 }
 
-var fieldNames = ["username=","password=","firstname=","lastname=","email="];
-var result;
-
 function getInput(){
 	var arr = [];
 	var postData = "";
-
 	// gets the arguments passed to it
 	for (i = 0; i < arguments.length; i++){
 		arr.push(arguments[i]);
 	}
-
 	// constructs a query string to POST to PHP
 	function cycleThroughArgs(){
 		for (i = 0; i < arr.length - 1; i++){
@@ -31,37 +29,31 @@ function getInput(){
 			}
 		}
 	}
-
 	if (arr[0] == 'existing'){
 		cycleThroughArgs();
 		postData += "&type=existing";
 	}
-
 	if (arr[0] == 'new'){
 		cycleThroughArgs();
 		postData += "&type=new";
 	}
-
 	// fires it over
 	firePHP(postData);
 	//console.log(postData);
 }
 
-var o = {};
+//this is magic -- it does something when a var is CRUD'ed
+Object.observe(o, function() {
+    errorReporting();
+}); 
 
-Object.observe(o, function(changes) {
-  changes.forEach(function(change) {
-    //console.log(change.type, change.name, change.oldValue);
-    checkLength();
-  });
-});
-
-
+//AJAX baby!
 function firePHP(postData){
 	var http = new XMLHttpRequest();
 		http.onreadystatechange=function(){
 		if (http.readyState == 4 && http.status == 200){
 			o.response = http.responseText;
+			//console.log(http.responseText);
 			}
 		}
 		http.open("POST", "process.php", true);
@@ -69,65 +61,33 @@ function firePHP(postData){
 		http.send(postData);
 }
 
+function errorReporting(){
+	//console.log("this object has " + Object.keys(o).length + " properties");
+	//useful, gives you an integer on how many properties an object has.
+	console.log(o);
 
-function checkLength(){
-	if (Object.keys(o).length === 0){
-	console.log("this object doesnt have any properties");
-	}
-	else {
-	console.log("this object has " + Object.keys(o).length + " properties");
 	for (var name in o){
-		var letMeIn = o[name].substring(o[name].indexOf("=")+1,o[name].length);
-		if (letMeIn == "false"){
-			var h = document.getElementById("output");
-			h.appendChild(document.createTextNode("You've entered incorrect credentials there buddy"));
-			h.style.display = "block";
-		}
-		else if (letMeIn == "true"){
-			var h = document.getElementById("output");
-			h.appendChild(document.createTextNode("Welcome!"));
-			h.style.display = "block";
-		}
-	}
-	}
+		// im basically storing url strings in an object as this is what i want php to pass me
+		// i then slice these based on the key/value and branch off from there!
+		var objectKey = o[name].substring(0,o[name].indexOf("="));
+		var objectValue = o[name].substring(o[name].indexOf("=")+1,o[name].length);
 
-}
-
-
-
-
-document.getElementById("debug").addEventListener("click", printDebug);
-
-function printDebug(){
-
-
-if (resp === undefined){
-		console.log("nothing to return");
-	}
-	else{
-		var returnedKey = resp.substring(0,resp.indexOf("="));	
-		var returnedVal = resp.substring(resp.indexOf("=")+1,resp.length);
-		console.log(resp);
-		if (returnedKey == "correct" && returnedVal == "true"){
-			var h = document.getElementById("output");
-			h.appendChild(document.createTextNode("Welcome!"));
-			h.style.display = "block";
+		if (objectKey == "exists"){
+			console.log("this user already exists");
 		}
 
-		else if (returnedKey == "correct" && returnedVal == "false"){
-			var h = document.getElementById("output");
-			h.appendChild(document.createTextNode("You've entered incorrect credentials there buddy"));
-			h.style.display = "block";
+		if (objectKey == "correct"){
+			if (objectValue == "false"){
+				var h = document.getElementById("output");
+				h.appendChild(document.createTextNode("You've entered incorrect credentials there buddy"));
+				h.style.display = "block";
+			}
+			else if (objectValue == "true"){
+				window.location = "http://intheon.xyz/hope/";
+			}
 		}
 
-}
-
-
-}
-
-
-
-
+}}
 
 
 

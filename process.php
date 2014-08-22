@@ -13,7 +13,7 @@ if ($_POST['type'] == "existing"){
 	existingUser();
 }
 if ($_POST['type'] == "new"){
-	newUser();
+	newUserCheck();
 }
 
 function existingUser(){
@@ -42,9 +42,24 @@ function existingUser(){
 
 }
 
-function newUser(){
+function newUserCheck(){		// obviously want to check if this username already exists.
+	if (isset($_POST['username'])){
+		global $connection;
+		$username = $_POST['username'];
+		$result = mysqli_query($connection,"SELECT tbl_username FROM login");
+		while($row = mysqli_fetch_array($result)) {
+			$uid = $row['tbl_username'];
+				if ($uid == $username) {
+					echo "exists=yes";
+				}
+				else{
+					addNewUser();
+				}
+		}
+	}
+}
 
-		echo "wow";
+function addNewUser(){
 
 }
 
