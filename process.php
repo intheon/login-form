@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'dataman';
+$database = 'hiya';
 
 $connection = mysqli_connect($host, $username, $password, $database);
 
@@ -44,23 +44,49 @@ function existingUser(){
 
 function newUserCheck(){		// obviously want to check if this username already exists.
 	if (isset($_POST['username'])){
+		$username = mysql_real_escape_string($_POST['username']);
 		global $connection;
-		$username = $_POST['username'];
-		$result = mysqli_query($connection,"SELECT tbl_username FROM login");
-		while($row = mysqli_fetch_array($result)) {
-			$uid = $row['tbl_username'];
-				if ($uid == $username) {
-					echo "exists=yes";
-				}
-				else{
-					addNewUser();
-				}
-		}
+
+		$query = mysqli_query($connection,"SELECT tbl_username FROM login WHERE tbl_username='$username'");
+
+ 		if (mysqli_num_rows($query) != 0){
+      		echo "username=exists";
+  		}
+
+  		else{
+    		addNewUser();
+  		}
 	}
 }
 
-function addNewUser(){
 
+function addNewUser(){
+	global $connection;
+	$php_timestamp = time();
+	$php_timestamp_date = date("d F Y", $php_timestamp);
+	$username = mysql_real_escape_string($_POST['username']);
+	$password = mysql_real_escape_string($_POST['password']);
+	$firstname = mysql_real_escape_string($_POST['firstname']);
+	$lastname = mysql_real_escape_string($_POST['lastname']);
+	$email = $_POST['email'];
+	$dateCreated = $php_timestamp_date;
+
+	$sql = mysqli_query($connection,"INSERT INTO login (
+									tbl_username,
+									tbl_password,
+									tbl_firstname,
+									tbl_lastname,
+									tbl_email,
+									tbl_dateCreated) 
+									VALUES (
+									'$username',
+									'$password',
+									'$firstname',
+									'$lastname',
+									'$email',
+									'$dateCreated')"
+									);
+	echo "username=created";
 }
 
 

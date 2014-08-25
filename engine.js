@@ -73,7 +73,9 @@ function errorReporting(){
 		var objectValue = o[name].substring(o[name].indexOf("=")+1,o[name].length);
 
 		if (objectKey == "exists"){
-			console.log("this user already exists");
+			var h = document.getElementById("output");
+			h.appendChild(document.createTextNode("This user already exists"));
+			h.style.display = "block";
 		}
 
 		if (objectKey == "correct"){
